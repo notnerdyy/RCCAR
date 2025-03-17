@@ -19,7 +19,7 @@ const formattedCart = computed(() => cartStore.formattedCart)
     </div>
     <div v-else-if="!formattedCart.length">
       <h1 class="text-xl">
-        Cart is empty.
+        購物車內無商品，趕快去選購!
       </h1>
     </div>
     <div v-else class="space-y-4">
