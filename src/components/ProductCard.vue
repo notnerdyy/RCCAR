@@ -12,7 +12,7 @@ const cartStore = useCartStore()
 
 <template>
   <div class="card bordered ">
-    <figure class="px-8 pt-10">
+    <figure class="px-4 pt-6">
       <img
         :src="product.image"
         alt="Card Image"
@@ -27,7 +27,7 @@ const cartStore = useCartStore()
       </h2>
       <p>{{ toCurrency(product.price) }}</p>
       <div class="justify-end card-actions">
-        <button class="btn btn-primary" @click="cartStore.add(product.id)">
+        <button class="btn btn-grey" @click="cartStore.add(product.id)">
           加入購物車
         </button>
       </div>

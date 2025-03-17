@@ -24,7 +24,7 @@ const count = computed(() => cartStore.count)
     <div class="flex-1 px-2 mx-2">
       <div class="items-stretch hidden lg:flex">
         <router-link class="btn btn-ghost btn-sm rounded-btn" to="/">
-          首頁
+          商品列表
         </router-link>
         <router-link class="btn btn-ghost btn-sm rounded-btn" to="/cart">
           購物車
