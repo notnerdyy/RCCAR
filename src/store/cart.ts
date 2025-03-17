@@ -1,6 +1,7 @@
 import { defineStore } from 'pinia'
 import { useProductStore } from './products'
 import { CART_STORAGE } from '@/composables/usePersistCart'
+import Swal from 'sweetalert2'
 
 export interface Purchase {
   productId: number
@@ -72,14 +73,32 @@ export const useCartStore = defineStore({
         }
       }
     },
-    remove(productId: number) {
-      if (!this.contents[productId])
+    async remove(productId: number) {
+      if (!this.contents[productId]) return
+
+      const products = useProductStore()
+      const product = products.items[productId]
+
+      // 如果數量大於1，直接減1
+      if (this.contents[productId].quantity > 1) {
+        this.contents[productId].quantity -= 1
         return
+      }
 
-      this.contents[productId].quantity -= 1
-
-      if (this.contents[productId].quantity === 0)
+      // 如果數量為1，顯示確認對話框
+      const result = await Swal.fire({
+        title: '確認刪除',
+        text: `確定要從購物車中移除 ${product.title} 嗎？`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: '確認刪除',
+        cancelButtonText: '取消'
+      })
+      if (result.isConfirmed) {
         delete this.contents[productId]
+      }
     },
   },
 })
