@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2'
 
 // 基本的成功通知 Toast
-export const successToast = (message) => {
+export function successToast (message) {
   return Swal.fire({
     toast: true,
     position: 'top-end',
@@ -18,7 +18,7 @@ export const successToast = (message) => {
 }
 
 // 加入購物車成功通知
-export const addToCartSuccess = (productName, quantity = 1) => {
+export function addToCartSuccess (productName, quantity = 1) {
   const message = quantity > 1 
     ? `已將 ${quantity} 個 ${productName} 加入購物車` 
     : `已將 ${productName} 加入購物車`
@@ -27,7 +27,7 @@ export const addToCartSuccess = (productName, quantity = 1) => {
 }
 
 // 詢問是否前往購物車
-export const askGoToCart = (productName, quantity = 1) => {
+export function askGoToCart (productName, quantity = 1) {
   const message = quantity > 1 
     ? `已將 ${quantity} 個 ${productName} 加入購物車` 
     : `已將 ${productName} 加入購物車`
@@ -45,7 +45,7 @@ export const askGoToCart = (productName, quantity = 1) => {
 }
 
 // 錯誤通知
-export const errorAlert = (title, message) => {
+export function errorAlert (title, message) {
   return Swal.fire({
     icon: 'error',
     title: title || '發生錯誤',
@@ -55,7 +55,7 @@ export const errorAlert = (title, message) => {
 }
 
 // 確認操作
-export const confirmAction = (title, text, confirmText = '確認', cancelText = '取消') => {
+export function confirmAction (title, text, confirmText = '確認', cancelText = '取消') {
   return Swal.fire({
     title,
     text,
@@ -69,7 +69,7 @@ export const confirmAction = (title, text, confirmText = '確認', cancelText = 
 }
 
 // 載入中
-export const loadingAlert = (title = '處理中...') => {
+export function loadingAlert (title = '處理中...') {
   return Swal.fire({
     title,
     allowOutsideClick: false,
@@ -80,7 +80,7 @@ export const loadingAlert = (title = '處理中...') => {
 }
 
 // 關閉當前 alert
-export const closeAlert = () => {
+export function closeAlert () {
   Swal.close()
 }
 

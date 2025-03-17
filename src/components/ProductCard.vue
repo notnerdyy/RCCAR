@@ -1,28 +1,27 @@
 <script setup lang="ts">
-import { useCartStore } from "@/store/cart";
-import type { Product } from "@/store/products";
-import { toCurrency } from "@/shared/utils";
-import { addToCartSuccess, askGoToCart } from "@/components/sweetAlert";
-import { useRouter } from "vue-router";
+import { useRouter } from 'vue-router'
+import { addToCartSuccess, askGoToCart } from '@/components/sweetAlert'
+import { useCartStore } from '@/store/cart'
+import type { Product } from '@/store/products'
+import { toCurrency } from '@/shared/utils'
 
 const props = defineProps<{
-  product: Product;
-}>();
+  product: Product
+}>()
 
-const router = useRouter();
-const cartStore = useCartStore();
+const router = useRouter()
+const cartStore = useCartStore()
 
-const handleAddToCart = async () => {
+async function handleAddToCart() {
   // 添加商品到購物車
-  cartStore.add(props.product.id);
-  const result = await askGoToCart(props.product.title);
+  cartStore.add(props.product.id)
+  const result = await askGoToCart(props.product.title)
 
-  if (result.isConfirmed) {
-    router.push("/cart");
-  } else {
-    addToCartSuccess(props.product.title);
-  }
-};
+  if (result.isConfirmed)
+    router.push('/cart')
+  else
+    addToCartSuccess(props.product.title)
+}
 </script>
 
 <template>

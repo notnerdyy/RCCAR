@@ -1,7 +1,7 @@
 import { defineStore } from 'pinia'
+import Swal from 'sweetalert2'
 import { useProductStore } from './products'
 import { CART_STORAGE } from '@/composables/usePersistCart'
-import Swal from 'sweetalert2'
 
 export interface Purchase {
   productId: number
@@ -74,7 +74,8 @@ export const useCartStore = defineStore({
       }
     },
     async remove(productId: number) {
-      if (!this.contents[productId]) return
+      if (!this.contents[productId])
+        return
 
       const products = useProductStore()
       const product = products.items[productId]
@@ -88,17 +89,35 @@ export const useCartStore = defineStore({
       // 如果數量為1，顯示確認對話框
       const result = await Swal.fire({
         title: '確認刪除',
-        text: `確定要從購物車中移除 ${product.title} 嗎？`,
+        text: `確定要從購物車中移除 ${product.title} 嗎?`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#d33',
         cancelButtonColor: '#3085d6',
         confirmButtonText: '確認刪除',
-        cancelButtonText: '取消'
+        cancelButtonText: '取消',
       })
-      if (result.isConfirmed) {
+      if (result.isConfirmed)
         delete this.contents[productId]
-      }
+    },
+    async delete(productId: number) {
+      if (!this.contents[productId])
+        return
+
+      const products = useProductStore()
+      const product = products.items[productId]
+      const result = await Swal.fire({
+        title: '確認刪除',
+        text: `確定要從購物車中移除 ${product.title} 嗎?`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#d33',
+        cancelButtonColor: '#3085d6',
+        confirmButtonText: '確認刪除',
+        cancelButtonText: '取消',
+      })
+      if (result.isConfirmed)
+        delete this.contents[productId]
     },
   },
 })
